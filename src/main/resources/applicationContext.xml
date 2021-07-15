@@ -63,6 +63,24 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactoty"></property>
     </bean>
+    <!-- 4.txAdvice-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="insert*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="find*" read-only="true"/>
+            <tx:method name="*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 5.aop-->
+    <aop:config>
+        <aop:pointcut id="pointcut" expression="execution(* cn.itcast.service.*.*(..))" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut" />
+    </aop:config>
 
 
     <!--5.声明式事务 -->
