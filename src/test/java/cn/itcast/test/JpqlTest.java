@@ -48,5 +48,23 @@ public class JpqlTest {
         customerDao.updateCustomer(4l,"黑马程序员");
     }
 
+    //测试sql查询
+    @Test
+    public void testFindSql() {
+        List<Object[]> list = customerDao.findSql();
+        for(Object [] obj : list) {
+            System.out.println(Arrays.toString(obj));
+        }
+    }
+
+    //测试sql查询模糊
+    @Test
+    public void testFindSqlLike() {
+        List<Object[]> list = customerDao.findSqlLike("传智播客%");
+        for(Object [] obj : list) {
+            System.out.println(Arrays.toString(obj));
+        }
+    }
+
 
 }
