@@ -67,4 +67,28 @@ public class JpqlTest {
     }
 
 
+    //测试方法命名规则的查询
+    @Test
+    public void testNaming() {
+        Customer customer = customerDao.findByCustName("传智播客");
+        System.out.println(customer);
+    }
+
+
+    //测试方法命名规则的查询
+    @Test
+    public void testFindByCustNameLike() {
+        List<Customer> list = customerDao.findByCustNameLike("传智播客%");
+        for (Customer customer : list) {
+            System.out.println(customer);
+        }
+    }
+
+
+    //测试方法命名规则的查询
+    @Test
+    public void testFindByCustNameLikeAndCustIndustry() {
+        Customer customer = customerDao.findByCustNameLikeAndCustIndustry("传智播客1%", "it教育");
+        System.out.println(customer);
+    }
 }
